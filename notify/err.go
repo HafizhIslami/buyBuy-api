@@ -1,12 +1,19 @@
-package utils
+package notify
 
 import (
 	"runtime"
 	"strings"
 )
 
-func getRelativePath() string {
-	_, filename, _, ok := runtime.Caller(1)
+// This error handler will send notification to discord 
+func ErrorHandler(err error) error {
+	DiscordNotif("", err.Error())
+	
+	return err
+}
+
+func GetRelativePath() string {
+	_, filename, _, ok := runtime.Caller(2)
 	if !ok {
 		return "unknown"
 	}
